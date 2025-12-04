@@ -1,0 +1,996 @@
+// Triggers Module Styles
+.TriggersOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.TriggersWrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 45vw;
+    max-width: 800px;
+    min-width: 500px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border-radius: 1vw;
+    border: 2px solid rgba(152, 45, 234, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+    overflow: hidden;
+    font-family: "Inter", sans-serif;
+}
+
+.TriggersHeader {
+    display: flex;
+    align-items: center;
+    padding: 1.5vw 2vw;
+    background: linear-gradient(90deg, rgba(152, 45, 234, 0.2) 0%, rgba(152, 45, 234, 0.05) 100%);
+    border-bottom: 1px solid rgba(152, 45, 234, 0.2);
+    gap: 1vw;
+
+    i {
+        font-size: 1.5vw;
+        color: rgb(152, 45, 234);
+    }
+
+    span {
+        font-size: 1.2vw;
+        font-weight: 600;
+        color: #ffffff;
+        flex: 1;
+    }
+
+    .TriggersCount {
+        background: rgba(152, 45, 234, 0.2);
+        padding: 0.3vw 0.8vw;
+        border-radius: 0.5vw;
+        font-size: 0.9vw;
+        font-weight: 500;
+        color: rgb(152, 45, 234);
+        border: 1px solid rgba(152, 45, 234, 0.3);
+    }
+}
+
+.TriggersBody {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding: 1vw;
+
+    &::-webkit-scrollbar {
+        width: 0.3vw;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 0.15vw;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba(152, 45, 234, 0.6);
+        border-radius: 0.15vw;
+        
+        &:hover {
+            background: rgba(152, 45, 234, 0.8);
+        }
+    }
+}
+
+.NoTriggers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3vw;
+    color: rgba(255, 255, 255, 0.6);
+    text-align: center;
+
+    i {
+        font-size: 3vw;
+        margin-bottom: 1vw;
+        opacity: 0.5;
+    }
+
+    span {
+        font-size: 1.1vw;
+        font-weight: 500;
+    }
+}
+
+.TriggersList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8vw;
+}
+
+.TriggerItem {
+    display: flex;
+    align-items: center;
+    padding: 1.2vw;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 0.8vw;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    gap: 1vw;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(152, 45, 234, 0.3);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    &.enabled {
+        border-color: rgba(152, 45, 234, 0.4);
+        background: rgba(152, 45, 234, 0.08);
+
+        .TriggerIcon {
+            background: rgba(152, 45, 234, 0.2);
+        }
+    }
+
+    &.disabled {
+        opacity: 0.6;
+
+        .TriggerIcon {
+            background: rgba(255, 255, 255, 0.1);
+        }
+    }
+}
+
+.TriggerIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3vw;
+    height: 3vw;
+    border-radius: 0.6vw;
+    background: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+
+    i {
+        font-size: 1.2vw;
+    }
+}
+
+.TriggerInfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3vw;
+
+    .TriggerName {
+        font-size: 1.1vw;
+        font-weight: 600;
+        color: #ffffff;
+        margin-bottom: 0.2vw;
+    }
+
+    .TriggerDescription {
+        font-size: 0.9vw;
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.4;
+    }
+
+    .TriggerType {
+        font-size: 0.7vw;
+        font-weight: 700;
+        letter-spacing: 0.05vw;
+        margin-top: 0.3vw;
+        opacity: 0.8;
+    }
+}
+
+.TriggerToggle {
+    width: 3vw;
+    height: 1.5vw;
+    border-radius: 0.75vw;
+    position: relative;
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+    &.on {
+        background: linear-gradient(90deg, rgb(152, 45, 234) 0%, rgba(152, 45, 234, 0.8) 100%);
+        
+        .ToggleSwitch {
+            transform: translateX(1.5vw);
+            background: #ffffff;
+        }
+    }
+
+    &.off {
+        background: rgba(255, 255, 255, 0.2);
+        
+        .ToggleSwitch {
+            transform: translateX(0);
+            background: rgba(255, 255, 255, 0.6);
+        }
+    }
+
+    .ToggleSwitch {
+        position: absolute;
+        top: 0.15vw;
+        left: 0.15vw;
+        width: 1.2vw;
+        height: 1.2vw;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.TriggersFooter {
+    padding: 1vw 2vw;
+    background: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+    .TriggerTypes {
+        display: flex;
+        justify-content: center;
+
+        .TypeLegend {
+            display: flex;
+            gap: 2vw;
+            font-size: 0.8vw;
+            font-weight: 500;
+
+            span {
+                display: flex;
+                align-items: center;
+                gap: 0.3vw;
+            }
+        }
+    }
+}
+
+// Responsive Design
+@media (max-width: 1200px) {
+    .TriggersWrapper {
+        width: 60vw;
+        min-width: 400px;
+    }
+
+    .TriggersHeader {
+        padding: 2vw;
+
+        i {
+            font-size: 2vw;
+        }
+
+        span {
+            font-size: 1.5vw;
+        }
+
+        .TriggersCount {
+            font-size: 1.1vw;
+            padding: 0.5vw 1vw;
+        }
+    }
+
+    .TriggerItem {
+        padding: 1.5vw;
+
+        .TriggerIcon {
+            width: 4vw;
+            height: 4vw;
+
+            i {
+                font-size: 1.5vw;
+            }
+        }
+
+        .TriggerInfo {
+            .TriggerName {
+                font-size: 1.3vw;
+            }
+
+            .TriggerDescription {
+                font-size: 1.1vw;
+            }
+
+            .TriggerType {
+                font-size: 0.9vw;
+            }
+        }
+
+        .TriggerToggle {
+            width: 4vw;
+            height: 2vw;
+
+            &.on .ToggleSwitch {
+                transform: translateX(2vw);
+            }
+
+            .ToggleSwitch {
+                width: 1.6vw;
+                height: 1.6vw;
+                top: 0.2vw;
+                left: 0.2vw;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .TriggersWrapper {
+        width: 90vw;
+        min-width: 300px;
+    }
+}
+
+// =================== FREECAM STYLES ===================
+
+// Variables
+$primary-color: rgb(150, 0, 0);
+$primary-dark: rgb(120, 0, 0);
+$background-dark: rgba(0, 0, 0, 0.95);
+$background-light: rgba(20, 20, 40, 0.95);
+$text-color: white;
+$border-radius: 15px;
+$transition: all 0.3s ease;
+
+// Freecam Toggle Button
+.freecam-toggle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 9999;
+
+  .freecam-activate-btn {
+    background: linear-gradient(135deg, $primary-color, $primary-dark);
+    border: none;
+    color: black;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(150, 0, 0, 0.3);
+    transition: $transition;
+    font-size: 14px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(150, 0, 0, 0.4);
+      background: linear-gradient(135deg, lighten($primary-color, 10%), $primary-color);
+    }
+
+    &:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 10px rgba(150, 0, 0, 0.5);
+    }
+  }
+}
+
+// Main Freecam Container
+.freecam-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10000;
+  pointer-events: none;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  * {
+    pointer-events: auto;
+  }
+}
+
+// Crosshair Styles
+.freecam-crosshair {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10001;
+
+  .crosshair-center {
+    width: 4px;
+    height: 4px;
+    background: $primary-color;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px $primary-color, 0 0 20px rgba(150, 0, 0, 0.5);
+    animation: crosshairPulse 2s ease-in-out infinite;
+  }
+
+  .crosshair-lines {
+    .line {
+      background: $primary-color;
+      position: absolute;
+      box-shadow: 0 0 5px $primary-color;
+
+      &.horizontal {
+        width: 20px;
+        height: 2px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        &::before, &::after {
+          content: '';
+          position: absolute;
+          width: 6px;
+          height: 2px;
+          background: $primary-color;
+          top: 0;
+          box-shadow: 0 0 3px $primary-color;
+        }
+
+        &::before { left: -10px; }
+        &::after { right: -10px; }
+      }
+
+      &.vertical {
+        width: 2px;
+        height: 20px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        &::before, &::after {
+          content: '';
+          position: absolute;
+          width: 2px;
+          height: 6px;
+          background: $primary-color;
+          left: 0;
+          box-shadow: 0 0 3px $primary-color;
+        }
+
+        &::before { top: -10px; }
+        &::after { bottom: -10px; }
+      }
+    }
+  }
+}
+
+// Main Panel
+.freecam-panel {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 380px;
+  background: linear-gradient(135deg, $background-dark, $background-light);
+  border: 2px solid $primary-color;
+  border-radius: $border-radius;
+  backdrop-filter: blur(15px);
+  color: $text-color;
+  box-shadow: 
+    0 0 40px rgba(150, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  animation: slideInRight 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  // Header
+  .freecam-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: linear-gradient(90deg, $primary-color, $primary-dark);
+    border-radius: calc(#{$border-radius} - 2px) calc(#{$border-radius} - 2px) 0 0;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    .freecam-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: bold;
+      font-size: 16px;
+      color: black;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+
+      .freecam-icon {
+        font-size: 20px;
+        animation: iconPulse 2s infinite;
+        
+        img {
+          width: 24px;
+          height: 24px;
+          border-radius: 4px;
+          object-fit: cover;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        span {
+          font-size: 20px;
+        }
+      }
+
+      .status-indicator {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin-left: 10px;
+
+        &.active {
+          background: #ff0000;
+          animation: statusBlink 1s infinite;
+          box-shadow: 0 0 5px #ff0000;
+        }
+      }
+    }
+
+    .freecam-close {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: black;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: bold;
+      transition: $transition;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        background: rgba(255, 0, 0, 0.8);
+        color: white;
+        transform: scale(1.1) rotate(90deg);
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+      }
+    }
+  }
+
+  // Content Area
+  .freecam-content {
+    padding: 20px;
+    max-height: 600px;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, $primary-color, $primary-dark);
+      border-radius: 3px;
+      
+      &:hover {
+        background: linear-gradient(180deg, lighten($primary-color, 10%), $primary-color);
+      }
+    }
+  }
+
+  // Sections
+  .controls-section, .options-section, .selector-section {
+    margin-bottom: 25px;
+
+    h3 {
+      margin: 0 0 15px 0;
+      font-size: 14px;
+      color: $primary-color;
+      border-bottom: 1px solid rgba(150, 0, 0, 0.3);
+      padding-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 30px;
+        height: 2px;
+        background: $primary-color;
+        border-radius: 1px;
+      }
+    }
+  }
+
+  // Controls Grid
+  .controls-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+
+    .control-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      font-size: 12px;
+      transition: $transition;
+
+      &:hover {
+        background: rgba(150, 0, 0, 0.1);
+        border-color: rgba(150, 0, 0, 0.3);
+        transform: translateY(-1px);
+      }
+
+      .key {
+        background: rgba(150, 0, 0, 0.2);
+        padding: 3px 6px;
+        border-radius: 4px;
+        font-weight: bold;
+        min-width: 35px;
+        text-align: center;
+        border: 1px solid rgba(150, 0, 0, 0.3);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+      }
+    }
+  }
+
+  // Options List
+  .options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .option-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(150, 0, 0, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    &:hover {
+      background: rgba(150, 0, 0, 0.1);
+      border-color: rgba(150, 0, 0, 0.5);
+      transform: translateX(5px);
+
+      &::before {
+        left: 100%;
+      }
+    }
+
+    &.active {
+      background: rgba(150, 0, 0, 0.2);
+      border-color: $primary-color;
+      transform: translateX(8px);
+      box-shadow: 
+        0 0 15px rgba(150, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 3px;
+        height: 100%;
+        background: $primary-color;
+        box-shadow: 0 0 10px $primary-color;
+      }
+    }
+
+    &.executing {
+      animation: executeFlash 0.5s ease-in-out infinite alternate;
+    }
+
+    .option-icon {
+      font-size: 18px;
+      width: 24px;
+      text-align: center;
+      filter: drop-shadow(0 0 3px currentColor);
+    }
+
+    .option-text {
+      flex: 1;
+      font-weight: 500;
+    }
+
+    .option-indicator {
+      color: $primary-color;
+      font-weight: bold;
+      animation: slideIndicator 1s ease-in-out infinite alternate;
+      text-shadow: 0 0 5px currentColor;
+    }
+  }
+
+  // Selector Container
+  .selector-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid rgba(150, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent 30%, rgba(150, 0, 0, 0.05) 50%, transparent 70%);
+      animation: selectorGlow 3s ease-in-out infinite;
+    }
+
+    .selector-btn {
+      background: linear-gradient(135deg, rgba(150, 0, 0, 0.2), rgba(150, 0, 0, 0.1));
+      border: 1px solid $primary-color;
+      color: $text-color;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      font-size: 12px;
+      position: relative;
+      z-index: 1;
+
+      &:hover {
+        background: linear-gradient(135deg, $primary-color, $primary-dark);
+        color: black;
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(150, 0, 0, 0.5);
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+
+    .current-selection {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+      margin: 0 20px;
+      position: relative;
+      z-index: 1;
+
+      .selection-icon {
+        font-size: 24px;
+        animation: selectionBounce 2s ease-in-out infinite;
+        filter: drop-shadow(0 0 5px currentColor);
+      }
+
+      .selection-name {
+        font-weight: bold;
+        color: $primary-color;
+        text-align: center;
+        font-size: 14px;
+        text-shadow: 0 0 10px currentColor;
+      }
+
+      .selection-index {
+        font-size: 11px;
+        opacity: 0.7;
+        background: rgba(150, 0, 0, 0.1);
+        padding: 2px 8px;
+        border-radius: 10px;
+        border: 1px solid rgba(150, 0, 0, 0.3);
+      }
+    }
+  }
+
+  // Footer
+  .freecam-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 0 0 calc(#{$border-radius} - 2px) calc(#{$border-radius} - 2px);
+    border-top: 1px solid rgba(150, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+
+    .status-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .status-label {
+        font-size: 10px;
+        opacity: 0.7;
+        margin-bottom: 3px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .status-value {
+        font-size: 12px;
+        font-weight: bold;
+        color: $primary-color;
+        text-shadow: 0 0 5px currentColor;
+      }
+    }
+  }
+}
+
+// =================== ANIMATIONS ===================
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes crosshairPulse {
+  0%, 100% { 
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  50% { 
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.8;
+  }
+}
+
+@keyframes iconPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes statusBlink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0.3; }
+}
+
+@keyframes executeFlash {
+  from { 
+    background: rgba(150, 0, 0, 0.2);
+    box-shadow: 0 0 15px rgba(150, 0, 0, 0.3);
+  }
+  to { 
+    background: rgba(150, 0, 0, 0.5);
+    box-shadow: 0 0 25px rgba(150, 0, 0, 0.6);
+  }
+}
+
+@keyframes slideIndicator {
+  from { transform: translateX(0); }
+  to { transform: translateX(5px); }
+}
+
+@keyframes selectionBounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-5px); }
+  60% { transform: translateY(-3px); }
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+@keyframes selectorGlow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+}
+
+// =================== FREECAM RESPONSIVE DESIGN ===================
+
+@media (max-width: 1200px) {
+  .freecam-panel {
+    width: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .freecam-panel {
+    width: 320px;
+    top: 10px;
+    right: 10px;
+  }
+
+  .controls-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .selector-container {
+    flex-direction: column;
+    gap: 15px;
+
+    .current-selection {
+      margin: 0;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .freecam-panel {
+    width: calc(100vw - 20px);
+    left: 10px;
+    right: 10px;
+  }
+
+  .freecam-toggle {
+    top: 10px;
+    left: 10px;
+
+    .freecam-activate-btn {
+      padding: 10px 16px;
+      font-size: 12px;
+    }
+  }
+}
+
+// =================== DARK MODE SUPPORT ===================
+
+@media (prefers-color-scheme: dark) {
+  .freecam-panel {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.98), rgba(10, 10, 20, 0.98));
+    border-color: lighten($primary-color, 10%);
+  }
+}
+
+// =================== HIGH CONTRAST MODE ===================
+
+@media (prefers-contrast: high) {
+  .freecam-panel {
+    border-width: 3px;
+    
+    .option-item {
+      border-width: 2px;
+      
+      &.active {
+        border-width: 3px;
+      }
+    }
+  }
+}
+
+// =================== REDUCED MOTION ===================
+
+@media (prefers-reduced-motion: reduce) {
+  .freecam-container * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

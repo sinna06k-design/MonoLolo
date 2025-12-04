@@ -1,0 +1,154 @@
+@import"https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap";
+
+:root {
+    --menu-color: 200, 0, 0
+}
+
+.NotificationsWrapper {
+    position: fixed;
+    bottom: 0vw;
+    right: 0vw;
+    display: flex;
+    flex-direction: column;
+    gap: .5208vw;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.Notification {
+    background-color: #000000e6;
+    padding: .5208vw;
+    width: 18.2292vw;
+    min-width: 18.2292vw;
+    display: flex;
+    flex-direction: row;
+    gap: .5vw;
+    align-items: center;
+    color: #fff;
+    position: relative;
+    font-family: Inter;
+    pointer-events: auto;
+    opacity: 0;
+    transform: translateY(1.5vw) translate(120%);
+    transition: opacity .2s ease,transform 1.25s ease;
+}
+
+.Notification.enter {
+    opacity: 1;
+    transform: translateY(0) translate(0);
+}
+
+.Notification.exit {
+    opacity: 0;
+    transform: translateY(1.5vw) translate(20%);
+}
+
+.Notification i {
+    margin-left: .5vw;
+    font-size: 1.25vw;
+    flex-shrink: 0;
+}
+
+.Notification .NotificationBorder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: .35vw;
+    height: 100%;
+}
+
+.Notification .NotificationContent {
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+    flex: 1;
+    min-width: 0;
+}
+
+.Notification .NotificationTitle {
+    font-size: .7292vw;
+    font-weight: 700;
+}
+
+.Notification .NotificationDesc {
+    font-size: .625vw;
+    word-wrap: break-word;
+    color: #aaa;
+}
+
+.Notification .NotificationProgress {
+    position: absolute;
+    display: flex;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 0%;
+    height: .2vw;
+    background-color: rgb(var(--menu-color));
+    animation-name: progress;
+    animation-timing-function: linear;
+}
+
+// Default red theme for most notifications
+.Notification {
+    .NotificationBorder {
+        background-color: rgb(var(--menu-color));
+    }
+    
+    i {
+        color: rgb(var(--menu-color));
+    }
+}
+
+// Special colors for different notification types
+.Notification.spawn {
+    .NotificationBorder {
+        background-color: rgb(30, 144, 255); /* Blue for spawn */
+    }
+    
+    .NotificationProgress {
+        background-color: rgb(30, 144, 255);
+    }
+    
+    i {
+        color: rgb(30, 144, 255);
+    }
+}
+
+.Notification.toggle_on {
+    .NotificationBorder {
+        background-color: #28a745; /* Green for toggle ON */
+    }
+    
+    .NotificationProgress {
+        background-color: #28a745;
+    }
+    
+    i {
+        color: #28a745;
+    }
+}
+
+.Notification.toggle_off {
+    .NotificationBorder {
+        background-color: #dc3545; /* Red for toggle OFF */
+    }
+    
+    .NotificationProgress {
+        background-color: #dc3545;
+    }
+    
+    i {
+        color: #dc3545;
+    }
+}
+
+@keyframes progress {
+    0% {
+        width: 100%
+    }
+
+    to {
+        width: 0%
+    }
+}
